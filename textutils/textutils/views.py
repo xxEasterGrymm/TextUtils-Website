@@ -14,31 +14,42 @@ def index(request):
 
 def analyze(request):
     text = request.GET.get('text', 'default')
-    removeChar = request.GET.get('removechar', 'off')
+    removechar = request.GET.get('removechar', 'off')
+    fullcaps = request.GET.get('capitalizeall', 'off')
+    firstcaps = request.GET.get('capitalizefirst', 'off')
+    remline = request.GET.get('newlineremove', 'off')
+    charcount = request.GET.get('charcount', 'off')
     analyzed = text
     params = {
         'purpose': '',
         'analyzedText': ''
     }
-    if removeChar == 'on':
+
+    if removechar == 'on':
         analyzed = ""
-        specialCharacters = '''!()-[]{};:'"\,<>./?@#$%^&*_~'''
+        specialcharacters = '''!()-[]{};:'"\,<>./?@#$%^&*_~'''
         for character in text:
-            if character not in specialCharacters:
+            if character not in specialcharacters:
                 analyzed = analyzed + character
             params['purpose'] = 'with Special Characters removed '
 
+    if firstcaps == 'on':
+        analyzed = analyzed[0].upper() + analyzed[1:len(analyzed)]
+
+    if fullcaps == 'on':
+        analyzed = analyzed.upper()
+
+    if remline == 'on':
+        temp = ""
+        for character in analyzed:
+            if character != "\n":
+                temp = temp + character
+            analyzed = temp
+
+    if charcount == 'on':
+        analyzed = analyzed\
+                   + ' | Character Count of Original Text - %s' % len(text)\
+                   + ' | Character Count of Analyzed Text - %s' % len(analyzed)
+
     params['analyzedText'] = analyzed
     return render(request, 'analyze.html', params)
-
-def capitalizeFirst(request):
-    return HttpResponse("Capitalize First")
-
-def newlineRemove(request):
-    return HttpResponse("New line remove")
-
-def spaceRemove(request):
-    return HttpResponse("Space remove <a href='/'>Home</a>")
-
-def characterCount(request):
-    return HttpResponse("Character Count")

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Text Utils | Home</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <h1>Welcome to the Text Analyzer!</h1>
+    <h2>Enter the text you want to analyze below:</h2>
+    <form action="/analyze" method="get">
+        <textarea name="text" style="margin: 0px; width: 800px; height: 90px;"></textarea><br/>
+        <input type="checkbox" name="removechar">Remove Special Characters</input>
+        <input type="checkbox" name="capitalizefirst">Capitalize First Character</input>
+        <input type="checkbox" name="newlineremove">Remove New Lines</input>
+        <input type="checkbox" name="spaceremove">Remove Spaces</input>
+        <input type="checkbox" name="charcount">Count Characters</input>
+        <br/><br/><button type="submit">Analyze Text</button>
+    </form>
+</body>
+</html>

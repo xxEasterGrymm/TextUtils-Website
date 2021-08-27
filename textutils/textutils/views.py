@@ -1,12 +1,6 @@
 # manually created file - xxEasterGrymm
-from django.http import HttpResponse
+
 from django.shortcuts import render
-
-# def index(request):
-#    return HttpResponse('''<h1>Hello User</h1> <a href="https://www.google.com/">Click here</a>''')
-
-# def about(request):
-#   return HttpResponse("About")
 
 def index(request):
     # a dictionary can be passed as the third parameter to be used in the html file
@@ -18,11 +12,12 @@ def analyze(request):
     fullcaps = request.GET.get('capitalizeall', 'off')
     firstcaps = request.GET.get('capitalizefirst', 'off')
     remline = request.GET.get('newlineremove', 'off')
-    charcount = request.GET.get('charcount', 'off')
+    remspace = request.GET.get('spaceremove', 'off')
     analyzed = text
     params = {
-        'purpose': '',
-        'analyzedText': ''
+        'analyzedText': '',
+        'originalCount': '',
+        'analyzedCount': ''
     }
 
     if removechar == 'on':
@@ -31,7 +26,6 @@ def analyze(request):
         for character in text:
             if character not in specialcharacters:
                 analyzed = analyzed + character
-            params['purpose'] = 'with Special Characters removed '
 
     if firstcaps == 'on':
         analyzed = analyzed[0].upper() + analyzed[1:len(analyzed)]
@@ -46,10 +40,14 @@ def analyze(request):
                 temp = temp + character
             analyzed = temp
 
-    if charcount == 'on':
-        analyzed = analyzed\
-                   + ' | Character Count of Original Text - %s' % len(text)\
-                   + ' | Character Count of Analyzed Text - %s' % len(analyzed)
+    if remspace == 'on':
+        temp = ""
+        for character in analyzed:
+            if character != " ":
+                temp = temp + character
+            analyzed = temp
 
     params['analyzedText'] = analyzed
+    params['originalCount'] = len(text)
+    params['analyzedCount'] = len(analyzed)
     return render(request, 'analyze.html', params)

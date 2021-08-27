@@ -1,7 +1,9 @@
 # TextUtils-Website
 
 ## Home page of the site
-![image](https://user-images.githubusercontent.com/70765320/131191781-9e0521e8-1941-43b9-8b21-8c569f07b372.png)
+![image](https://user-images.githubusercontent.com/70765320/131192076-98b244fb-208a-4d4d-8805-e7544e8f5660.png)
+
 <br/><br/>
+
 ## Page after analyzing the text
-![image](https://user-images.githubusercontent.com/70765320/131191883-0252e2c2-a634-49de-b5b9-b1fe19861f36.png)
+![image](https://user-images.githubusercontent.com/70765320/131192111-d5c12119-562b-4239-b49d-25a806d95328.png)

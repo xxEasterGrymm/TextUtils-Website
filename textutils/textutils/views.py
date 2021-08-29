@@ -1,5 +1,3 @@
-# manually created file - xxEasterGrymm
-
 from django.shortcuts import render
 
 def index(request):
@@ -7,12 +5,12 @@ def index(request):
     return render(request, 'index.html')
 
 def analyze(request):
-    text = request.GET.get('text', 'default')
-    removechar = request.GET.get('removechar', 'off')
-    fullcaps = request.GET.get('capitalizeall', 'off')
-    firstcaps = request.GET.get('capitalizefirst', 'off')
-    remline = request.GET.get('newlineremove', 'off')
-    remspace = request.GET.get('spaceremove', 'off')
+    text = request.POST.get('text', 'default')
+    removechar = request.POST.get('removechar', 'off')
+    fullcaps = request.POST.get('capitalizeall', 'off')
+    firstcaps = request.POST.get('capitalizefirst', 'off')
+    remline = request.POST.get('newlineremove', 'off')
+    remspace = request.POST.get('spaceremove', 'off')
     analyzed = text
     params = {
         'analyzedText': '',
